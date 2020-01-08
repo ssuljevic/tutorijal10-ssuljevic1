@@ -1,20 +1,28 @@
 package ba.unsa.etf.rpr.tutorijal10;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.File;
 
 public class GlavnaController {
     DrzavaController drzavaController;
-    public TableView<Grad> tableViewGrad;
+    public TableView tableviewGrad;
+    public TableColumn colGradId;
+    public TableColumn colGradNaziv;
+    public TableColumn colGradStanovnika;
+    public TableColumn colGradDrzava;
+
     public Button btnObrisiGrad;
+    GeografijaModel dao = null;
     public void otvoriDrzavu(ActionEvent actionEvent) {
         Parent root = null;
         try {
@@ -35,5 +43,24 @@ public class GlavnaController {
             System.out.println(e.getMessage());
         }
     }
+    public void resetujBazu() {
+        GeografijaModel.removeInstance();
+        File dbfile = new File("baza.db");
+        dbfile.delete();
+        dao = GeografijaModel.dajInstancu();
+    }
+    @FXML
+    public void initialize() {
+
+
+
+
+        dao = GeografijaModel.dajInstancu();
+        tableviewGrad.setItems(dao.getGradovi());
+        tableviewGrad.refresh();
+    }
+
+
+
 }
 

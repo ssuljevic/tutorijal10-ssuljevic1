@@ -10,6 +10,13 @@ public class Glavna extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        GeografijaModel model = null;
+        model = GeografijaModel.dajInstancu();
+
+        GlavnaController glavnaController = new GlavnaController();
+
+
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/glavna.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 572, 300));
