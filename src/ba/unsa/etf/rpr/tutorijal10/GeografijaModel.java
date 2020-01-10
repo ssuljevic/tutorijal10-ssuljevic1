@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.tutorijal10;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -13,7 +14,7 @@ import java.util.Scanner;
 public class GeografijaModel {
 
     private ObservableList<Grad> gradovi = FXCollections.observableArrayList();
-    private ObjectProperty<Grad> trenutniGrad = null;
+    private ObjectProperty<Grad> trenutniGrad = new SimpleObjectProperty<>();
     private ObservableList<Drzava> drzave = FXCollections.observableArrayList();
     private ObjectProperty<Drzava> trenutnaDrzava = null;
 
@@ -25,7 +26,10 @@ public class GeografijaModel {
 
     public void napuni() {
         gradovi.removeAll();
-        gradovi.add(new Grad(1, "Sarajevo", 120000, null));
+        gradovi.add(new Grad(1, "Sarajevo", 120000, "BIH"));
+        gradovi.add(new Grad(2, "Berlin", 150000, "Njemacka"));
+
+        trenutniGrad.set(null);
     }
     public ObservableList<Grad> getGradovi() {
         return gradovi;

@@ -7,8 +7,8 @@ import javafx.beans.property.SimpleStringProperty;
 public class Grad {
     private SimpleIntegerProperty id;
     private SimpleStringProperty naziv;
-    private SimpleIntegerProperty brojStanovnika;
     private SimpleStringProperty drzava;
+    private SimpleIntegerProperty brojStanovnika;
 
     public Grad(int id, String naziv, int brojStanovnika, String drzava) {
         this.id = new SimpleIntegerProperty(id);

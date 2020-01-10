@@ -16,14 +16,15 @@ import java.io.File;
 public class GlavnaController {
     DrzavaController drzavaController;
     GradController gradController;
-    public TableView tableviewGrad;
-    public TableColumn colGradId;
-    public TableColumn colGradNaziv;
-    public TableColumn colGradStanovnika;
-    public TableColumn colGradDrzava;
+    GradController izmijeniGradController;
+    public TableView<Grad> tableviewGrad;
+    public TableColumn<Grad, String> colGradId;
+    public TableColumn<Grad, String> colGradNaziv;
+    public TableColumn<Grad, String> colGradStanovnika;
+    public TableColumn<Grad, String> colGradDrzava;
 
     public Button btnObrisiGrad;
-    GeografijaModel dao = null;
+    private  GeografijaModel dao = GeografijaModel.dajInstancu();
     public void otvoriDrzavu(ActionEvent actionEvent) {
         Parent root = null;
         try {
@@ -61,6 +62,27 @@ public class GlavnaController {
             System.out.println(e.getMessage());
         }
     }
+    public void izmijeniGrad(ActionEvent actionEvent) {
+        try {
+            Stage myStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/grad.fxml"));
+            loader.load();
+           izmijeniGradController = loader.getController();
+
+            myStage.setTitle("Grad");
+            myStage.setScene(new Scene(loader.getRoot(), 450, 210));
+            myStage.setResizable(false);
+            myStage.show();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void obrisiGrad(ActionEvent actionEvent) {
+        int selektovani = tableviewGrad.getSelectionModel().getSelectedIndex();
+        tableviewGrad.getItems().remove(tableviewGrad.getSelectionModel().getFocusedIndex());
+        tableviewGrad.getSelectionModel().select(selektovani);
+    }
     public void resetujBazu() {
         GeografijaModel.removeInstance();
         File dbfile = new File("baza.db");
@@ -70,13 +92,20 @@ public class GlavnaController {
 
     @FXML
     public void initialize() {
-
-
-
-
-        dao = GeografijaModel.dajInstancu();
+        colGradId.setCellValueFactory(new PropertyValueFactory<Grad, String>("id"));
+        colGradNaziv.setCellValueFactory(new PropertyValueFactory<Grad, String>("naziv"));
+        colGradDrzava.setCellValueFactory(new PropertyValueFactory<Grad, String>("drzava"));
+        colGradStanovnika.setCellValueFactory(new PropertyValueFactory<Grad, String>("brojStanovnika"));
         tableviewGrad.setItems(dao.getGradovi());
-        tableviewGrad.refresh();
+        tableviewGrad.getSelectionModel().selectedItemProperty().addListener((obs, oldGrad, newGrad) -> {
+            dao.setTrenutniGrad(newGrad);
+            tableviewGrad.refresh();
+        });
+
+
+
+
+
     }
 
 

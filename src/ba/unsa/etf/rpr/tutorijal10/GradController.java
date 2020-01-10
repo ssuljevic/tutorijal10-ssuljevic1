@@ -12,16 +12,18 @@ public class GradController {
     }
     @FXML
     public void initialize() {
-        fieldBrojStanovnika = new TextField("");
+
         if( fieldNaziv.getText().isEmpty()) {
             fieldNaziv.getStyleClass().removeAll("poljeIspravno");
             fieldNaziv.getStyleClass().add("poljeNijeIspravno");
         }
-        if( fieldBrojStanovnika.getText().toString().length() == 0) {
+
+        if( fieldBrojStanovnika.getText().isEmpty()) {
             fieldBrojStanovnika.getStyleClass().removeAll("poljeIspravno");
             fieldBrojStanovnika.getStyleClass().add("poljeNijeIspravno");
         }
 
+        /*
         fieldBrojStanovnika.textProperty().addListener((obs, old, novo) -> {
            if(!novo.isEmpty()) {
                fieldBrojStanovnika.getStyleClass().removeAll("poljeNijeIspravno");
@@ -40,7 +42,7 @@ public class GradController {
                fieldBrojStanovnika.getStyleClass().add("poljeIspravno");
            }
 
-        });
+        });*/
 
         fieldNaziv.textProperty().addListener((obs, old, novo) -> {
             if( novo.isEmpty()) {
