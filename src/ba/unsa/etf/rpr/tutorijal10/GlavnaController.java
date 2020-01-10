@@ -15,6 +15,7 @@ import java.io.File;
 
 public class GlavnaController {
     DrzavaController drzavaController;
+    GradController gradController;
     public TableView tableviewGrad;
     public TableColumn colGradId;
     public TableColumn colGradNaziv;
@@ -43,12 +44,30 @@ public class GlavnaController {
             System.out.println(e.getMessage());
         }
     }
+    public void otvoriGrad(ActionEvent actionEvent) {
+        Parent root = null;
+
+        try {
+            Stage myStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/grad.fxml"));
+            loader.load();
+            gradController = loader.getController();
+
+            myStage.setTitle("Grad");
+            myStage.setScene(new Scene(loader.getRoot(), 450, 210));
+            myStage.setResizable(false);
+            myStage.show();
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void resetujBazu() {
         GeografijaModel.removeInstance();
         File dbfile = new File("baza.db");
         dbfile.delete();
         dao = GeografijaModel.dajInstancu();
     }
+
     @FXML
     public void initialize() {
 

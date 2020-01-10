@@ -12,7 +12,10 @@ public class DrzavaController {
 
     @FXML
     public void initialize() {
-
+        if( fieldNaziv.getText().isEmpty()) {
+            fieldNaziv.getStyleClass().removeAll("poljeIspravno");
+            fieldNaziv.getStyleClass().add("poljeNijeIspravno");
+        }
         fieldNaziv.textProperty().addListener((obs, old, novo) -> {
             if( novo.isEmpty()) {
                 fieldNaziv.getStyleClass().removeAll("poljeIspravno");

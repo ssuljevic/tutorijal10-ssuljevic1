@@ -124,7 +124,7 @@ public class GeografijaModel {
         }
         instance = null;
     }
-
+/*
     public ArrayList<Grad> gradovi() {
         ArrayList<Grad> rez = new ArrayList<>();
         try {
@@ -152,8 +152,8 @@ public class GeografijaModel {
             return null;
         }
     }
-
-    private Drzava dajDrzavu(int id, Grad grad) {
+*/
+    /*private Drzava dajDrzavu(int id, Grad grad) {
         try {
             dajDrzavuUpit.setInt(1, id);
             ResultSet rs = dajDrzavuUpit.executeQuery();
@@ -280,5 +280,5 @@ public class GeografijaModel {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
